@@ -1,0 +1,96 @@
+:root {
+    --fundo: #080808;
+    --neon: #00ffff;
+    --rosa: #ff0055;
+    --texto: #ffffff;
+    --amarelo: #e2d21a;
+}
+
+body.light-theme {
+    --fundo: #f8f8f8;
+    --texto: #111;
+    --neon: #006688;
+}
+
+body {
+    background-color: var(--fundo);
+    color: var(--texto);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    transition: 0.3s;
+}
+
+.top-bar { width: 100%; display: flex; justify-content: space-between; padding: 15px; box-sizing: border-box; }
+
+.rgb-text { font-size: 3.5rem; color: var(--amarelo); text-shadow: 0 0 20px rgba(226, 210, 26, 0.5); margin: 10px 0; }
+
+.main-container { display: flex; flex-direction: column; align-items: center; gap: 15px; max-width: 500px; }
+
+/* JUIZ */
+.judge-container {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 1px solid var(--neon);
+    margin-bottom: 10px;
+    width: 100%;
+}
+.judge-avatar { font-size: 2rem; margin-right: 15px; }
+#judge-message { font-size: 0.9rem; font-weight: bold; color: var(--neon); margin: 0; }
+
+/* TABULEIRO */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 12px;
+    border: 4px solid var(--neon);
+    padding: 15px;
+    background: #000;
+    box-shadow: 0 0 25px var(--neon);
+    border-radius: 10px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background: #151515;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cell:hover { background: #222; }
+.cell.x { color: var(--rosa); text-shadow: 0 0 15px var(--rosa); }
+.cell.o { color: var(--neon); text-shadow: 0 0 15px var(--neon); }
+
+/* PIX E FOOTER */
+.pix-container {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px dashed var(--amarelo);
+    border-radius: 10px;
+    text-align: center;
+}
+.pix-chave { color: var(--amarelo); display: block; margin-top: 5px; }
+
+.footer { margin: 20px 0; font-weight: bold; color: var(--neon); opacity: 0.8; }
+
+button, select {
+    background: #000;
+    border: 2px solid var(--neon);
+    color: var(--neon);
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:hover { background: var(--neon); color: #000; }
