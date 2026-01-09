@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha Gamer - João</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dark-theme">
+
+    <div class="top-bar">
+        <button id="themeBtn" title="Mudar Tema">🌓 MODO CLARO/ESCURO</button>
+        <button onclick="sair()" class="btn-sair">SAIR</button>
+    </div>
+
+    <h1 class="rgb-text">JOGO DO JOÃO</h1>
+
+    <div class="main-container">
+        
+        <div class="judge-container">
+            <div class="judge-avatar">👨‍⚖️</div>
+            <div class="judge-bubble">
+                <p id="judge-message">Olá! Sou o juiz da partida. Que comece o duelo!</p>
+            </div>
+        </div>
+
+        <div class="controles">
+            <select id="gameMode">
+                <option value="easy">🤖 Robô: Fácil</option>
+                <option value="medium">🤖 Robô: Médio</option>
+                <option value="hard">🤖 Robô: Imbatível</option>
+                <option value="friend">👥 Contra Amigo</option>
+            </select>
+            <p class="player-info">Jogador: <span id="playerName">---</span></p>
+        </div>
+
+        <div class="board" id="board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+
+        <h2 id="status">Sua vez (X)</h2>
+        <button id="resetBtn" class="btn-primary">REINICIAR JOGO</button>
+
+        <div class="pix-container">
+            <p>Faça uma doação para manter o jogo no ar:</p>
+            <strong class="pix-chave">PIX: joaogui310813@gmail.com</strong>
+        </div>
+
+        <footer class="footer">
+            Desenvolvido por João
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

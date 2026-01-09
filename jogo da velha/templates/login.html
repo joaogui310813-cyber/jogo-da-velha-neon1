@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Jogo do João</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Estilo específico para centralizar o formulário */
+        .auth-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .auth-container {
+            background: var(--tabuleiro);
+            padding: 40px;
+            border: 3px solid var(--borda);
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 20px var(--borda);
+        }
+        input {
+            width: 250px;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid var(--borda);
+            background: #222;
+            color: white;
+            display: block;
+        }
+        .auth-btn {
+            width: 100%;
+            margin-top: 15px;
+            background: var(--texto);
+            color: var(--fundo);
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .toggle-text {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+
+    <div class="auth-wrapper">
+        <h1 class="rgb-text">JOGO DO JOÃO</h1>
+        
+        <div class="auth-container">
+            <h2 id="authTitle">ENTRAR</h2>
+            <form id="authForm">
+                <input type="text" id="username" placeholder="Usuário" required>
+                <input type="password" id="password" placeholder="Senha" required>
+                <button type="submit" class="auth-btn" id="mainBtn">LOGAR</button>
+            </form>
+            <p class="toggle-text" id="toggleAuth">Ainda não tem conta? Criar agora</p>
+        </div>
+    </div>
+
+    <script>
+        const authForm = document.getElementById('authForm');
+        const authTitle = document.getElementById('authTitle');
+        const toggleAuth = document.getElementById('toggleAuth');
+        const mainBtn = document.getElementById('mainBtn');
+        let isLoginMode = true;
+
+        // Alternar entre Login e Cadastro
+        toggleAuth.addEventListener('click', () => {
+            isLoginMode = !isLoginMode;
+            authTitle.innerText = isLoginMode ? "ENTRAR" : "CRIAR CONTA";
+            mainBtn.innerText = isLoginMode ? "LOGAR" : "CADASTRAR";
+            toggleAuth.innerText = isLoginMode ? "Ainda não tem conta? Criar agora" : "Já tenho conta. Voltar";
+        });
+
+        authForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value.trim();
+
+            if (!isLoginMode) {
+                // MODO CADASTRO: Salva no localStorage
+                if (localStorage.getItem(`user_${user}`)) {
+                    alert("Esse usuário já existe!");
+                } else {
+                    localStorage.setItem(`user_${user}`, JSON.stringify({ password: pass, wins: 0 }));
+                    alert("Conta criada! Agora faça o login.");
+                    location.reload(); 
+                }
+            } else {
+                // MODO LOGIN: Verifica se a senha bate
+                const savedData = localStorage.getItem(`user_${user}`);
+                if (savedData) {
+                    const userData = JSON.parse(savedData);
+                    if (userData.password === pass) {
+                        // Salva quem está logado nesta sessão
+                        sessionStorage.setItem('usuarioLogado', user);
+                        window.location.href = "/"; // Manda para o jogo
+                    } else {
+                        alert("Senha incorreta!");
+                    }
+                } else {
+                    alert("Usuário não encontrado!");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
